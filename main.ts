@@ -37,10 +37,23 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
     for (let value of sprites.allOfKind(SpriteKind.Pikmin)) {
         if (sprites.readDataNumber(value, "type") == pikminType && sprites.readDataBoolean(value, "following")) {
             timer.background(function () {
+                for (let index = 0; index < 21; index++) {
+                    value.changeScale(0.5, ScaleAnchor.Middle)
+                    value.z += 0.5
+                    pause(5)
+                }
+                for (let index = 0; index < 21; index++) {
+                    value.changeScale(-0.5, ScaleAnchor.Middle)
+                    value.z += -0.5
+                    pause(5)
+                }
+                value.setScale(1, ScaleAnchor.Middle)
+            })
+            timer.background(function () {
                 sprites.setDataBoolean(value, "following", false)
                 value.follow(mySprite, 0)
-                value.setVelocity(mySprite.x - value.x, mySprite.y - value.y)
-                pause(1050)
+                value.setVelocity((mySprite.x - value.x) * 5, (mySprite.y - value.y) * 5)
+                pause(210)
                 value.setVelocity(0, 0)
             })
             break;
@@ -79,7 +92,7 @@ let mySprite: Sprite = null
 let allPikmin = 0
 let allColor = 0
 let packColor = 0
-tiles.setCurrentTilemap(tileUtil.createSmallMap(tilemap`level3`))
+tiles.setCurrentTilemap(tileUtil.createSmallMap(tilemap`homeOverWorld`))
 // function Handle_Ship_Moving() {
 // if (!(deaded)) {
 // if (controller.right.isPressed()) {
@@ -100,6 +113,7 @@ tiles.setCurrentTilemap(tileUtil.createSmallMap(tilemap`level3`))
 // }
 // }
 let Captain = sprites.create(assets.image`player`, SpriteKind.Player)
+scene.cameraFollowSprite(Captain)
 // function Handle_Ship_Moving() {
 // if (!(deaded)) {
 // if (controller.right.isPressed()) {
@@ -122,21 +136,32 @@ let Captain = sprites.create(assets.image`player`, SpriteKind.Player)
 mySprite = sprites.create(assets.image`pointer`, SpriteKind.PointerSprite)
 Pikmin_HUD = sprites.create(assets.image`noPikmin`, SpriteKind.HUD)
 let Player_HUD = sprites.create(assets.image`captionPhoto`, SpriteKind.HUD)
+Captain.setPosition(160, 120)
+Pikmin_HUD.setFlag(SpriteFlag.RelativeToCamera, true)
+Player_HUD.setFlag(SpriteFlag.RelativeToCamera, true)
 Player_HUD.setPosition(15, 105)
 Player_HUD.z = 9999
 Pikmin_HUD.setPosition(100, 105)
 Pikmin_HUD.z = 9999
 let pikminMeterThing = textsprite.create("0/0/0", 1, 13)
-pikminMeterThing.setPosition(134, 105)
+pikminMeterThing.setFlag(SpriteFlag.RelativeToCamera, true)
+pikminMeterThing.setPosition(132, 105)
 pikminMeterThing.z = 9999
 let hpPlayer = statusbars.create(20, 4, StatusBarKind.Health)
+hpPlayer.setFlag(SpriteFlag.RelativeToCamera, true)
 hpPlayer.z = 9999
 hpPlayer.setPosition(35, 105)
 pikminType = 0
 maxPT = 6
 controller.moveSprite(Captain, 75, 75)
 for (let index = 0; index < 20; index++) {
-    spawnPikmin(false, randint(0, 4), randint(4, 156), randint(4, 116))
+    spawnPikmin(false, 0, 160, 120)
+}
+for (let index = 0; index < 5; index++) {
+    spawnPikmin(false, 1, 160, 120)
+}
+for (let index = 0; index < 5; index++) {
+    spawnPikmin(false, 2, 160, 120)
 }
 game.onUpdate(function () {
     allPikmin = 0
