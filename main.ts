@@ -16,45 +16,45 @@ controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
     mySprite2.lifespan = 1000
 })
 function spawnPikmin (Wild: boolean, Type: number, X: number, Y: number) {
-    Pikmin = sprites.create([
+    Pikmin2 = sprites.create([
     assets.image`firePikmin0`,
     assets.image`waterPikmin0`,
     assets.image`elecPikmin0`,
     assets.image`chadPikmin0`,
     assets.image`poisionPikmin0`
     ][Type], SpriteKind.Pikmin)
-    sprites.setDataBoolean(Pikmin, "following", false)
-    sprites.setDataBoolean(Pikmin, "wild", Wild)
-    sprites.setDataNumber(Pikmin, "speed", randint(50.000001, 70.999999))
-    sprites.setDataNumber(Pikmin, "type", Type + 1)
-    Pikmin.setFlag(SpriteFlag.GhostThroughSprites, false)
-    sprites.setDataBoolean(Pikmin, "grabing?", false)
-    sprites.setDataNumber(Pikmin, "Gid", 0)
-    Pikmin.x = X
-    Pikmin.y = Y
+    sprites.setDataBoolean(Pikmin2, "following", false)
+    sprites.setDataBoolean(Pikmin2, "wild", Wild)
+    sprites.setDataNumber(Pikmin2, "speed", randint(50.000001, 70.999999))
+    sprites.setDataNumber(Pikmin2, "type", Type + 1)
+    Pikmin2.setFlag(SpriteFlag.GhostThroughSprites, false)
+    sprites.setDataBoolean(Pikmin2, "grabing?", false)
+    sprites.setDataNumber(Pikmin2, "Gid", 0)
+    Pikmin2.x = X
+    Pikmin2.y = Y
 }
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
-    for (let value of sprites.allOfKind(SpriteKind.Pikmin)) {
-        if (sprites.readDataNumber(value, "type") == pikminType && sprites.readDataBoolean(value, "following")) {
+    for (let value2 of sprites.allOfKind(SpriteKind.Pikmin)) {
+        if (sprites.readDataNumber(value2, "type") == pikminType && sprites.readDataBoolean(value2, "following")) {
             timer.background(function () {
-                for (let index = 0; index < 21; index++) {
-                    value.changeScale(0.5, ScaleAnchor.Middle)
-                    value.z += 0.5
+                for (let index = 0; index < 10; index++) {
+                    value2.changeScale(0.5, ScaleAnchor.Middle)
+                    value2.z += 0.5
                     pause(5)
                 }
-                for (let index = 0; index < 21; index++) {
-                    value.changeScale(-0.5, ScaleAnchor.Middle)
-                    value.z += -0.5
+                for (let index = 0; index < 10; index++) {
+                    value2.changeScale(-0.5, ScaleAnchor.Middle)
+                    value2.z += -0.5
                     pause(5)
                 }
-                value.setScale(1, ScaleAnchor.Middle)
+                value2.setScale(1, ScaleAnchor.Middle)
             })
             timer.background(function () {
-                sprites.setDataBoolean(value, "following", false)
-                value.follow(mySprite, 0)
-                value.setVelocity((mySprite.x - value.x) * 5, (mySprite.y - value.y) * 5)
+                sprites.setDataBoolean(value2, "following", false)
+                value2.follow(mySprite, 0)
+                value2.setVelocity((mySprite.x - value2.x) * 5, (mySprite.y - value2.y) * 5)
                 pause(210)
-                value.setVelocity(0, 0)
+                value2.setVelocity(0, 0)
             })
             break;
         }
@@ -65,6 +65,9 @@ sprites.onOverlap(SpriteKind.Wistle, SpriteKind.Pikmin, function (sprite, otherS
 })
 sprites.onOverlap(SpriteKind.Pikmin, SpriteKind.Player, function (sprite, otherSprite) {
     sprite.setFlag(SpriteFlag.GhostThroughWalls, false)
+})
+controller.menu.onEvent(ControllerButtonEvent.Repeated, function () {
+    scene.systemMenu.showSystemMenu()
 })
 controller.menu.onEvent(ControllerButtonEvent.Pressed, function () {
     pikminType += 1
@@ -83,15 +86,15 @@ controller.menu.onEvent(ControllerButtonEvent.Pressed, function () {
 function VisonArea (S1: Sprite, S2: Sprite, Range: number) {
     return Math.sqrt(Math.abs((S1.x - S2.x) ** 2 - (S1.y - S2.y) ** 2)) > Range
 }
-let Pikmin: Sprite = null
+let packColor = 0
+let allColor = 0
+let allPikmin = 0
+let Pikmin2: Sprite = null
 let mySprite2: Sprite = null
 let maxPT = 0
 let pikminType = 0
 let Pikmin_HUD: Sprite = null
 let mySprite: Sprite = null
-let allPikmin = 0
-let allColor = 0
-let packColor = 0
 tiles.setCurrentTilemap(tileUtil.createSmallMap(tilemap`homeOverWorld`))
 // function Handle_Ship_Moving() {
 // if (!(deaded)) {
@@ -143,9 +146,9 @@ Player_HUD.setPosition(15, 105)
 Player_HUD.z = 9999
 Pikmin_HUD.setPosition(100, 105)
 Pikmin_HUD.z = 9999
-let pikminMeterThing = textsprite.create("0/0/0", 1, 13)
+let pikminMeterThing = textsprite.create("x10/10/10", 1, 13)
 pikminMeterThing.setFlag(SpriteFlag.RelativeToCamera, true)
-pikminMeterThing.setPosition(132, 105)
+pikminMeterThing.setPosition(137, 105)
 pikminMeterThing.z = 9999
 let hpPlayer = statusbars.create(20, 4, StatusBarKind.Health)
 hpPlayer.setFlag(SpriteFlag.RelativeToCamera, true)
@@ -157,31 +160,31 @@ controller.moveSprite(Captain, 75, 75)
 for (let index = 0; index < 20; index++) {
     spawnPikmin(false, 0, 160, 120)
 }
-for (let index = 0; index < 5; index++) {
+for (let index = 0; index < 10; index++) {
     spawnPikmin(false, 1, 160, 120)
 }
-for (let index = 0; index < 5; index++) {
+for (let index = 0; index < 10; index++) {
     spawnPikmin(false, 2, 160, 120)
 }
 game.onUpdate(function () {
     allPikmin = 0
     allColor = 0
     packColor = 0
-    for (let value of sprites.allOfKind(SpriteKind.Pikmin)) {
-        if (sprites.readDataBoolean(value, "following")) {
-            value.follow(mySprite, sprites.readDataNumber(value, "speed"))
+    for (let value3 of sprites.allOfKind(SpriteKind.Pikmin)) {
+        if (sprites.readDataBoolean(value3, "following")) {
+            value3.follow(Captain, sprites.readDataNumber(value3, "speed"))
         }
         allPikmin += 1
-        if (sprites.readDataBoolean(value, "following")) {
+        if (sprites.readDataBoolean(value3, "following")) {
             allColor += 1
-            if (sprites.readDataNumber(value, "type") == pikminType) {
+            if (sprites.readDataNumber(value3, "type") == pikminType) {
                 packColor += 1
             }
         }
     }
-    pikminMeterThing.setText("" + packColor + "/" + allColor + "/" + allPikmin)
-    for (let value of sprites.allOfKind(SpriteKind.Wistle)) {
-        value.setPosition(mySprite.x, mySprite.y)
+    pikminMeterThing.setText("x" + packColor + "/" + allColor + "/" + allPikmin)
+    for (let value4 of sprites.allOfKind(SpriteKind.Wistle)) {
+        value4.setPosition(mySprite.x, mySprite.y)
     }
     if (controller.dx() != 0) {
         if (controller.dx() < 0) {
@@ -200,5 +203,34 @@ game.onUpdate(function () {
         }
     } else {
         mySprite.y = Captain.y
+    }
+    while (allPikmin == 0) {
+        pikminType += 1
+        if (pikminType == maxPT) {
+            pikminType = 0
+        }
+        Pikmin_HUD.setImage([
+        assets.image`noPikmin`,
+        assets.image`redPikmin`,
+        assets.image`bluePikmin`,
+        assets.image`yellowPikmin`,
+        assets.image`purplePikmin`,
+        assets.image`whitePikmin`
+        ][pikminType])
+        allPikmin = 0
+        allColor = 0
+        packColor = 0
+        for (let value5 of sprites.allOfKind(SpriteKind.Pikmin)) {
+            if (sprites.readDataBoolean(value5, "following")) {
+                value5.follow(Captain, sprites.readDataNumber(value5, "speed"))
+            }
+            allPikmin += 1
+            if (sprites.readDataBoolean(value5, "following")) {
+                allColor += 1
+                if (sprites.readDataNumber(value5, "type") == pikminType) {
+                    packColor += 1
+                }
+            }
+        }
     }
 })
