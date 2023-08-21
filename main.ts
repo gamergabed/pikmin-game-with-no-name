@@ -4,6 +4,7 @@ namespace SpriteKind {
     export const Wistle = SpriteKind.create()
     export const Pikmin = SpriteKind.create()
     export const HUD = SpriteKind.create()
+    export const Tresure = SpriteKind.create()
 }
 controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
     for (let value of sprites.allOfKind(SpriteKind.Pikmin)) {
@@ -23,10 +24,12 @@ function spawnPikmin (Wild: boolean, Type: number, X: number, Y: number) {
     assets.image`chadPikmin0`,
     assets.image`poisionPikmin0`
     ][Type], SpriteKind.Pikmin)
+    Pikmin2.z = 5
     sprites.setDataBoolean(Pikmin2, "following", false)
     sprites.setDataBoolean(Pikmin2, "wild", Wild)
     sprites.setDataNumber(Pikmin2, "speed", randint(50.000001, 70.999999))
     sprites.setDataNumber(Pikmin2, "type", Type + 1)
+    sprites.setDataNumber(Pikmin2, "spriteType", 0)
     Pikmin2.setFlag(SpriteFlag.GhostThroughSprites, false)
     sprites.setDataBoolean(Pikmin2, "grabing?", false)
     sprites.setDataNumber(Pikmin2, "Gid", 0)
@@ -35,17 +38,17 @@ function spawnPikmin (Wild: boolean, Type: number, X: number, Y: number) {
 }
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
     for (let value2 of sprites.allOfKind(SpriteKind.Pikmin)) {
-        if (sprites.readDataNumber(value2, "type") == pikminType && sprites.readDataBoolean(value2, "following")) {
+        if ((sprites.readDataNumber(value2, "type") == pikminType || pikminType == 0) && sprites.readDataBoolean(value2, "following")) {
             timer.background(function () {
-                for (let index = 0; index < 10; index++) {
-                    value2.changeScale(0.5, ScaleAnchor.Middle)
+                for (let index = 0; index < 5; index++) {
+                    value2.changeScale(0.1, ScaleAnchor.Middle)
                     value2.z += 0.5
-                    pause(5)
+                    pause(1)
                 }
-                for (let index = 0; index < 10; index++) {
-                    value2.changeScale(-0.5, ScaleAnchor.Middle)
-                    value2.z += -0.5
-                    pause(5)
+                for (let index = 0; index < 6; index++) {
+                    value2.changeScale(-0.1, ScaleAnchor.Middle)
+                    value2.z += -0.1
+                    pause(1)
                 }
                 value2.setScale(1, ScaleAnchor.Middle)
             })
@@ -60,6 +63,15 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
         }
     }
 })
+function spawnTresure (Type: number, TX: number, TY: number, Rotation: number, ID: number, Weight: number) {
+    Tresure = sprites.create([assets.image`treNail`, assets.image`treRoundFun`, assets.image`treEnergyContainer`][Type], SpriteKind.Tresure)
+    tiles.placeOnTile(Tresure, tiles.getTileLocation(TX, TY))
+    transformSprites.rotateSprite(Tresure, Rotation)
+    sprites.setDataNumber(Tresure, "spriteType", 1)
+    sprites.setDataNumber(Tresure, "Weight", Weight)
+    sprites.setDataNumber(Tresure, "PikminHolding", 0)
+    sprites.setDataNumber(Tresure, "Tid", ID)
+}
 sprites.onOverlap(SpriteKind.Wistle, SpriteKind.Pikmin, function (sprite, otherSprite) {
     sprites.setDataBoolean(otherSprite, "following", true)
 })
@@ -89,12 +101,15 @@ function VisonArea (S1: Sprite, S2: Sprite, Range: number) {
 let packColor = 0
 let allColor = 0
 let allPikmin = 0
+let Tresure: Sprite = null
 let Pikmin2: Sprite = null
 let mySprite2: Sprite = null
 let maxPT = 0
 let pikminType = 0
 let Pikmin_HUD: Sprite = null
 let mySprite: Sprite = null
+storyboard.loaderBootSequence.register()
+storyboard.start("game")
 tiles.setCurrentTilemap(tileUtil.createSmallMap(tilemap`homeOverWorld`))
 // function Handle_Ship_Moving() {
 // if (!(deaded)) {
@@ -116,6 +131,8 @@ tiles.setCurrentTilemap(tileUtil.createSmallMap(tilemap`homeOverWorld`))
 // }
 // }
 let Captain = sprites.create(assets.image`player`, SpriteKind.Player)
+Captain.z = 9997
+Captain.setPosition(160, 120)
 scene.cameraFollowSprite(Captain)
 // function Handle_Ship_Moving() {
 // if (!(deaded)) {
@@ -137,15 +154,15 @@ scene.cameraFollowSprite(Captain)
 // }
 // }
 mySprite = sprites.create(assets.image`pointer`, SpriteKind.PointerSprite)
+mySprite.z = 9998
 Pikmin_HUD = sprites.create(assets.image`noPikmin`, SpriteKind.HUD)
-let Player_HUD = sprites.create(assets.image`captionPhoto`, SpriteKind.HUD)
-Captain.setPosition(160, 120)
 Pikmin_HUD.setFlag(SpriteFlag.RelativeToCamera, true)
+Pikmin_HUD.setPosition(100, 105)
+Pikmin_HUD.z = 9999
+let Player_HUD = sprites.create(assets.image`captionPhoto`, SpriteKind.HUD)
 Player_HUD.setFlag(SpriteFlag.RelativeToCamera, true)
 Player_HUD.setPosition(15, 105)
 Player_HUD.z = 9999
-Pikmin_HUD.setPosition(100, 105)
-Pikmin_HUD.z = 9999
 let pikminMeterThing = textsprite.create("x10/10/10", 1, 13)
 pikminMeterThing.setFlag(SpriteFlag.RelativeToCamera, true)
 pikminMeterThing.setPosition(137, 105)
@@ -157,14 +174,10 @@ hpPlayer.setPosition(35, 105)
 pikminType = 0
 maxPT = 6
 controller.moveSprite(Captain, 75, 75)
-for (let index = 0; index < 20; index++) {
-    spawnPikmin(false, 0, 160, 120)
-}
-for (let index = 0; index < 10; index++) {
-    spawnPikmin(false, 1, 160, 120)
-}
-for (let index = 0; index < 10; index++) {
-    spawnPikmin(false, 2, 160, 120)
+spawnTresure(randint(0, 2), 12, 16, randint(0, 359), 5, 2)
+spawnTresure(randint(0, 2), 39, 36, randint(0, 359), 5, 2)
+for (let index = 0; index < randint(27, 35); index++) {
+    spawnPikmin(false, randint(0, 4), 160, 120)
 }
 game.onUpdate(function () {
     allPikmin = 0
