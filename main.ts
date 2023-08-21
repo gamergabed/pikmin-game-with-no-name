@@ -55,7 +55,7 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
             timer.background(function () {
                 sprites.setDataBoolean(value2, "following", false)
                 value2.follow(mySprite, 0)
-                value2.setVelocity((mySprite.x - value2.x) * 5, (mySprite.y - value2.y) * 5)
+                value2.setVelocity((mySprite.x - value2.x + randint(-4, 4)) * 5, (mySprite.y - value2.y + randint(-4, 4)) * 5)
                 pause(210)
                 value2.setVelocity(0, 0)
             })
@@ -63,6 +63,24 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
         }
     }
 })
+function loadHud () {
+    Pikmin_HUD = sprites.create(assets.image`noPikmin`, SpriteKind.HUD)
+    Pikmin_HUD.setFlag(SpriteFlag.RelativeToCamera, true)
+    Pikmin_HUD.setPosition(100, 105)
+    Pikmin_HUD.z = 9999
+    Player_HUD = sprites.create(assets.image`captionPhoto`, SpriteKind.HUD)
+    Player_HUD.setFlag(SpriteFlag.RelativeToCamera, true)
+    Player_HUD.setPosition(15, 105)
+    Player_HUD.z = 9999
+    pikminMeterThing = textsprite.create("x10/10/10", 1, 13)
+    pikminMeterThing.setFlag(SpriteFlag.RelativeToCamera, true)
+    pikminMeterThing.setPosition(137, 105)
+    pikminMeterThing.z = 9999
+    hpPlayer = statusbars.create(20, 4, StatusBarKind.Health)
+    hpPlayer.setFlag(SpriteFlag.RelativeToCamera, true)
+    hpPlayer.z = 9999
+    hpPlayer.setPosition(35, 105)
+}
 function spawnTresure (Type: number, TX: number, TY: number, Rotation: number, ID: number, Weight: number) {
     Tresure = sprites.create([assets.image`treNail`, assets.image`treRoundFun`, assets.image`treEnergyContainer`][Type], SpriteKind.Tresure)
     tiles.placeOnTile(Tresure, tiles.getTileLocation(TX, TY))
@@ -102,11 +120,14 @@ let packColor = 0
 let allColor = 0
 let allPikmin = 0
 let Tresure: Sprite = null
+let hpPlayer: StatusBarSprite = null
+let pikminMeterThing: TextSprite = null
+let Player_HUD: Sprite = null
+let Pikmin_HUD: Sprite = null
 let Pikmin2: Sprite = null
 let mySprite2: Sprite = null
 let maxPT = 0
 let pikminType = 0
-let Pikmin_HUD: Sprite = null
 let mySprite: Sprite = null
 storyboard.loaderBootSequence.register()
 storyboard.start("game")
@@ -155,22 +176,7 @@ scene.cameraFollowSprite(Captain)
 // }
 mySprite = sprites.create(assets.image`pointer`, SpriteKind.PointerSprite)
 mySprite.z = 9998
-Pikmin_HUD = sprites.create(assets.image`noPikmin`, SpriteKind.HUD)
-Pikmin_HUD.setFlag(SpriteFlag.RelativeToCamera, true)
-Pikmin_HUD.setPosition(100, 105)
-Pikmin_HUD.z = 9999
-let Player_HUD = sprites.create(assets.image`captionPhoto`, SpriteKind.HUD)
-Player_HUD.setFlag(SpriteFlag.RelativeToCamera, true)
-Player_HUD.setPosition(15, 105)
-Player_HUD.z = 9999
-let pikminMeterThing = textsprite.create("x10/10/10", 1, 13)
-pikminMeterThing.setFlag(SpriteFlag.RelativeToCamera, true)
-pikminMeterThing.setPosition(137, 105)
-pikminMeterThing.z = 9999
-let hpPlayer = statusbars.create(20, 4, StatusBarKind.Health)
-hpPlayer.setFlag(SpriteFlag.RelativeToCamera, true)
-hpPlayer.z = 9999
-hpPlayer.setPosition(35, 105)
+loadHud()
 pikminType = 0
 maxPT = 6
 controller.moveSprite(Captain, 75, 75)
