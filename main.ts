@@ -9,6 +9,7 @@ namespace SpriteKind {
 controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
     for (let value of sprites.allOfKind(SpriteKind.Pikmin)) {
         sprites.setDataBoolean(value, "following", false)
+        sprites.setDataNumber(value, "Gid", 0)
         value.follow(mySprite, 0)
     }
     mySprite2 = sprites.create(assets.image`wistile wave`, SpriteKind.Wistle)
@@ -55,16 +56,32 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
             timer.background(function () {
                 sprites.setDataBoolean(value2, "following", false)
                 value2.follow(mySprite, 0)
-                value2.setVelocity((mySprite.x - value2.x + randint(-4, 4)) * 5, (mySprite.y - value2.y + randint(-4, 4)) * 5)
+                value2.setVelocity((mySprite.x - value2.x + randint(-2, 2)) * 5, (mySprite.y - value2.y + randint(-2, 2)) * 5)
                 pause(210)
                 value2.setVelocity(0, 0)
+                for (let value of sprites.allOfKind(SpriteKind.Tresure)) {
+                    if (value2.overlapsWith(value)) {
+                        sprites.setDataNumber(value2, "Gid", sprites.readDataNumber(value, "Tid"))
+                        break;
+                    }
+                }
             })
             break;
         }
     }
 })
+scene.onPathCompletion(SpriteKind.Tresure, function (sprite, location) {
+    if (tiles.tileAtLocationEquals(location, assets.tile`hLANDING0`)) {
+        music.play(music.stringPlayable("C5 - B B - - - - ", 800), music.PlaybackMode.InBackground)
+        for (let value of sprites.allOfKind(SpriteKind.Pikmin)) {
+            if (true) {
+            	
+            }
+        }
+    }
+})
 function loadHud () {
-    Pikmin_HUD = sprites.create(assets.image`noPikmin`, SpriteKind.HUD)
+    Pikmin_HUD = sprites.create(assets.image`randomlyThrowPikmin`, SpriteKind.HUD)
     Pikmin_HUD.setFlag(SpriteFlag.RelativeToCamera, true)
     Pikmin_HUD.setPosition(100, 105)
     Pikmin_HUD.z = 9999
@@ -92,6 +109,7 @@ function spawnTresure (Type: number, TX: number, TY: number, Rotation: number, I
 }
 sprites.onOverlap(SpriteKind.Wistle, SpriteKind.Pikmin, function (sprite, otherSprite) {
     sprites.setDataBoolean(otherSprite, "following", true)
+    sprites.setDataNumber(otherSprite, "Gid", 0)
 })
 sprites.onOverlap(SpriteKind.Pikmin, SpriteKind.Player, function (sprite, otherSprite) {
     sprite.setFlag(SpriteFlag.GhostThroughWalls, false)
@@ -105,13 +123,16 @@ controller.menu.onEvent(ControllerButtonEvent.Pressed, function () {
         pikminType = 0
     }
     Pikmin_HUD.setImage([
-    assets.image`noPikmin`,
+    assets.image`randomlyThrowPikmin`,
     assets.image`redPikmin`,
     assets.image`bluePikmin`,
     assets.image`yellowPikmin`,
     assets.image`purplePikmin`,
     assets.image`whitePikmin`
     ][pikminType])
+})
+sprites.onOverlap(SpriteKind.Pikmin, SpriteKind.Tresure, function (sprite, otherSprite) {
+    otherSprite.sayText("" + sprites.readDataNumber(otherSprite, "PikminHolding") + "/" + sprites.readDataNumber(otherSprite, "Weight"), 500, false)
 })
 function VisonArea (S1: Sprite, S2: Sprite, Range: number) {
     return Math.sqrt(Math.abs((S1.x - S2.x) ** 2 - (S1.y - S2.y) ** 2)) > Range
@@ -181,11 +202,19 @@ pikminType = 0
 maxPT = 6
 controller.moveSprite(Captain, 75, 75)
 spawnTresure(randint(0, 2), 12, 16, randint(0, 359), 5, 2)
-spawnTresure(randint(0, 2), 39, 36, randint(0, 359), 5, 2)
-for (let index = 0; index < randint(27, 35); index++) {
+spawnTresure(randint(0, 2), 39, 36, randint(0, 359), 3, 2)
+spawnPikmin(false, 0, 160, 120)
+spawnPikmin(false, 1, 160, 120)
+spawnPikmin(false, 2, 160, 120)
+spawnPikmin(false, 3, 160, 120)
+spawnPikmin(false, 4, 160, 120)
+for (let index = 0; index < 15; index++) {
     spawnPikmin(false, randint(0, 4), 160, 120)
 }
 game.onUpdate(function () {
+    for (let value of sprites.allOfKind(SpriteKind.Tresure)) {
+        sprites.setDataNumber(value, "PikminHolding", 0)
+    }
     allPikmin = 0
     allColor = 0
     packColor = 0
@@ -193,12 +222,27 @@ game.onUpdate(function () {
         if (sprites.readDataBoolean(value3, "following")) {
             value3.follow(Captain, sprites.readDataNumber(value3, "speed"))
         }
+        if (sprites.readDataNumber(value3, "Gid") != 0) {
+            for (let value of sprites.allOfKind(SpriteKind.Tresure)) {
+                if (sprites.readDataNumber(value3, "Gid") == sprites.readDataNumber(value, "Tid")) {
+                    value3.follow(value, sprites.readDataNumber(value3, "speed"))
+                    sprites.changeDataNumberBy(value, "PikminHolding", 1)
+                }
+            }
+        }
         allPikmin += 1
         if (sprites.readDataBoolean(value3, "following")) {
             allColor += 1
             if (sprites.readDataNumber(value3, "type") == pikminType) {
                 packColor += 1
             }
+        }
+    }
+    for (let value of sprites.allOfKind(SpriteKind.Tresure)) {
+        if (sprites.readDataNumber(value, "PikminHolding") >= sprites.readDataNumber(value, "Weight")) {
+            scene.followPath(value, scene.aStar(value.tilemapLocation(), tiles.getTilesByType(assets.tile`hLANDING0`)[0]), 100)
+        } else {
+            scene.followPath(value, scene.aStar(value.tilemapLocation(), tiles.getTilesByType(assets.tile`hLANDING0`)[0]), 0)
         }
     }
     pikminMeterThing.setText("x" + packColor + "/" + allColor + "/" + allPikmin)
@@ -229,7 +273,7 @@ game.onUpdate(function () {
             pikminType = 0
         }
         Pikmin_HUD.setImage([
-        assets.image`noPikmin`,
+        assets.image`randomlyThrowPikmin`,
         assets.image`redPikmin`,
         assets.image`bluePikmin`,
         assets.image`yellowPikmin`,

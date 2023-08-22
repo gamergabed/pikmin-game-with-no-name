@@ -11,7 +11,8 @@
         "Timers": "github:microsoft/arcade-timers#v1.1.0",
         "pxt-status-bar": "github:jwunderl/pxt-status-bar#v0.4.2",
         "arcade-story": "github:microsoft/arcade-storytelling#v1.0.3",
-        "storyboard": "*"
+        "storyboard": "*",
+        "arcade-tilemap-a-star": "github:aqeeaqee/arcade-tilemap-a-star#v0.3.5"
     },
     "files": [
         "main.blocks",

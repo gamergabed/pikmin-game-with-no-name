@@ -166,25 +166,6 @@ a a a a
 1 7 1 1 
 . 1 1 . 
 `;
-            case "image22":
-            case "noPikmin":return img`
-. . . . 1 1 1 1 1 1 1 1 . . . . 
-. . 1 1 d d d d d d d d 1 1 . . 
-. 1 d d d d d d d d d d d d 1 . 
-. 1 d d d d d d d d d d d d 1 . 
-1 d d d b b b d d d d d d d d 1 
-1 d d b b b d b d d d d d d d 1 
-1 d d b b d d b d d d d d d d 1 
-1 d d b b d d b b d d d d d d 1 
-1 d d d d d b b b b d d d d d 1 
-1 d d d d d b b b b d d d d d 1 
-1 d d d d d b b b b d d d d d 1 
-1 d d d d d b b b b d d d d d 1 
-. 1 d d d d d b b d d d d d 1 . 
-. 1 d d d d d b b d d d d d 1 . 
-. . 1 1 d d d b b d d d 1 1 . . 
-. . . . 1 1 1 1 1 1 1 1 . . . . 
-`;
             case "image23":
             case "redPikmin":return img`
 . . . . 1 1 1 1 1 1 1 1 . . . . 
@@ -260,25 +241,6 @@ a a a a
 . 1 d d d d a a a a d d d d 1 . 
 . . 1 1 d d a a a a d d 1 1 . . 
 . . . . 1 1 1 1 1 1 1 1 . . . . 
-`;
-            case "image2":
-            case "pointer":return img`
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . 9 9 9 9 . . . . . . 
-. . . . . 9 . . . . 9 . . . . . 
-. . . . 9 . . 9 9 . . 9 . . . . 
-. . . . 9 . 9 . . 9 . 9 . . . . 
-. . . . 9 . 9 . . 9 . 9 . . . . 
-. . . . 9 . . 9 9 . . 9 . . . . 
-. . . . . 9 . . . . 9 . . . . . 
-. . . . . . 9 9 9 9 . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
 `;
             case "image29":
             case "captionPhoto":return img`
@@ -621,6 +583,101 @@ a a a a
 . 7 7 7 7 . . . . . . 7 7 7 7 . 
 . 7 7 7 . . . . . . . . 7 7 7 . 
 . 7 7 7 . . . . . . . . 7 7 7 . 
+. . . . . . . . . . . . . . . . 
+`;
+            case "image22":
+            case "randomlyThrowPikmin":return img`
+. . . . 1 1 1 1 1 1 1 1 . . . . 
+. . 1 1 d d d d d d d d 1 1 . . 
+. 1 d d d d d d d d d d d d 1 . 
+. 1 d d d d d d d d d d d d 1 . 
+1 d d d b b b d d d d d d d d 1 
+1 d d b b b d b d d d d d d d 1 
+1 d d b b d d b d d d d d d d 1 
+1 d d b b d d b b d d d d d d 1 
+1 d d d d d b b b b d d d d d 1 
+1 d d d d d b b b b d d d d d 1 
+1 d d d d d b b b b d d d d d 1 
+1 d d d d d b b b b d d d d d 1 
+. 1 d d d d d b b d d d d d 1 . 
+. 1 d d d d d b b d d d d d 1 . 
+. . 1 1 d d d b b d d d 1 1 . . 
+. . . . 1 1 1 1 1 1 1 1 . . . . 
+`;
+            case "image40":
+            case "rushE":return img`
+. . . . 1 1 1 1 1 1 1 1 . . . . 
+. . 1 1 d d d d d d d d 1 1 . . 
+. 1 d d d d d b b d d d d d 1 . 
+. 1 d d d d b b b b d d d d 1 . 
+1 d d d d b b b b b b d d d d 1 
+1 d d d b b b b b b b b d d d 1 
+1 d d d b b b b b b b b d d d 1 
+1 d d d d d d b b d d d d d d 1 
+1 d d d d d d b b d d d d d d 1 
+1 d d d d d d b b d d d d d d 1 
+1 d d d d d d b b d d d d d d 1 
+1 d d d d d d b b d d d d d d 1 
+. 1 d d d d d b b d d d d d 1 . 
+. 1 d d d d d b b d d d d d 1 . 
+. . 1 1 d d d d d d d d 1 1 . . 
+. . . . 1 1 1 1 1 1 1 1 . . . . 
+`;
+            case "image39":
+            case "orginisePikmin":return img`
+. . . . 1 1 1 1 1 1 1 1 . . . . 
+. . 1 1 d d d d d d d d 1 1 . . 
+. 1 d d d b b b b b b d d d 1 . 
+. 1 d d d b b b b b b d d d 1 . 
+1 d d d d d b b b b d d d d d 1 
+1 d b b d d d d d d d d b b d 1 
+1 d b b b d d d d d d b b b d 1 
+1 d b b b d d b b d d b b b d 1 
+1 d b b b d d b b d d b b b d 1 
+1 d b b b d d d d d d b b b d 1 
+1 d b b d d d d d d d d b b d 1 
+1 d d d d d b b b b d d d d d 1 
+. 1 d d d b b b b b b d d d 1 . 
+. 1 d d d b b b b b b d d d 1 . 
+. . 1 1 d d d d d d d d 1 1 . . 
+. . . . 1 1 1 1 1 1 1 1 . . . . 
+`;
+            case "image41":
+            case "orderPikmin":return img`
+. . . . 1 1 1 1 1 1 1 1 . . . . 
+. . 1 1 d d d d d d d d 1 1 . . 
+. 1 d d d d d d d d b b b d 1 . 
+. 1 d d d d b d d b d d d b 1 . 
+1 d d d b b b b d b d b d b d 1 
+1 d d d b d b d d b d d d b d 1 
+1 d d d b d d d d d b b b d d 1 
+1 d d d d d d d d d d d d d d 1 
+1 d d d d d b d d d d b d d d 1 
+1 d d b b b b d d d b b b d d 1 
+1 d d d d d b d d d d b d d d 1 
+1 d d d b b d d d d d b d d d 1 
+. 1 d b d d b d b b b b d d 1 . 
+. 1 d b d b b d d d d d d d 1 . 
+. . 1 1 b b d d d d d d 1 1 . . 
+. . . . 1 1 1 1 1 1 1 1 . . . . 
+`;
+            case "image2":
+            case "pointer":return img`
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . 9 9 9 9 9 9 . . . . . 
+. . . . 9 . . . . . . 9 . . . . 
+. . . 9 . . . . . . . . 9 . . . 
+. . . 9 . . . . . . . . 9 . . . 
+. . . 9 . . . 9 9 . . . 9 . . . 
+. . . 9 . . . 9 9 . . . 9 . . . 
+. . . 9 . . . . . . . . 9 . . . 
+. . . 9 . . . . . . . . 9 . . . 
+. . . . 9 . . . . . . 9 . . . . 
+. . . . . 9 9 9 9 9 9 . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
 . . . . . . . . . . . . . . . . 
 `;
         }
