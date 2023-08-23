@@ -19,26 +19,6 @@
         "mimeType": "image/x-mkcd-f4",
         "displayName": "pikminStemy"
     },
-    "image16": {
-        "data": "hwQIAAgAAAAAAAAAAAAAACAiAgAgIQIAEBEBACAiAgAAAAAAAAAAAA==",
-        "mimeType": "image/x-mkcd-f4",
-        "displayName": "redThing1"
-    },
-    "image18": {
-        "data": "hwQIAAgAAAAAAAAAAAAAACAhAQAQIQEAEBIBABASAgAAAAAAAAAAAA==",
-        "mimeType": "image/x-mkcd-f4",
-        "displayName": "redThing5"
-    },
-    "image17": {
-        "data": "hwQIAAgAAAAAAAAAAAAAABAiAQAQEgEAEBIBABARAQAAAAAAAAAAAA==",
-        "mimeType": "image/x-mkcd-f4",
-        "displayName": "redThing3"
-    },
-    "image19": {
-        "data": "hwQIAAgAAAAAAAAAAAAAAICICACAgQgAEBEBAICICAAAAAAAAAAAAA==",
-        "mimeType": "image/x-mkcd-f4",
-        "displayName": "blueThing1"
-    },
     "image20": {
         "data": "hwQQABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACIiAAAAAAAgIiICAAAAACJyJyIAAAAAIidyIgAAAAAiJ3IiAAAAACJyIiIAAAAAICIiAgAAAAAAIiIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
         "mimeType": "image/x-mkcd-f4",
@@ -149,11 +129,6 @@
         "mimeType": "image/x-mkcd-f4",
         "displayName": "bulborbDWARF"
     },
-    "image35": {
-        "data": "hwQQABAAAAAAAAAAAAAAAAAAAAAAAAAAAABAREQEAAAAAAQAAEAAAABAzMzMzAQAAAS8u7vLQAAABLzd3ctAAAAEvB3Ry0AAAAS8HdHLQAAABLzd3ctAAAAEvLu7y0AAAEDMzMzMBAAAAAQAAEAAAAAAQEREBAAAAAAAAAAAAAAAAAAAAAAAAA==",
-        "mimeType": "image/x-mkcd-f4",
-        "displayName": "shipThing"
-    },
     "image33": {
         "data": "hwQgACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAGZmIiIAAAAAAAAAAAAAAGZmZiIiIgAAAAAAAAAAAGBmmXlHRCICAAAAAAAAAABglpmZR0QiAgAAAAAAAAAAZpl5d3dHJCIAAAAAAAAAAGaZd5dEd0QiAAAAAAAAAABmmZd3RHdEIgAAAAAAAAAAZpeXeXd0dCIAAAAAAAAAACJ3R0R3eXdmAAAAAAAAAAAiRHd3d3mZZgAAAAAAAAAAIkR3RHl3mWYAAAAAAAAAACJEdEeZd5lmAAAAAAAAAAAgQkR3d3dpBgAAAAAAAAAAICJEdJeZZgYAAAAAAAAAAAAiIiJmZmYAAAAAAAAAAAAAACIiZmYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
         "mimeType": "image/x-mkcd-f4",
@@ -203,6 +178,41 @@
         "data": "hwQQABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAJCZmQkAAAAACQAAkAAAAJAAAAAACQAAkAAAAAAJAACQAJAJAAkAAJAAkAkACQAAkAAAAAAJAACQAAAAAAkAAAAJAACQAAAAAJCZmQkAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
         "mimeType": "image/x-mkcd-f4",
         "displayName": "pointer"
+    },
+    "image16": {
+        "data": "hwQIAAgAAAAAAAAAICIiAiAiEgIgIRICIBERAiAiEgIgIiICAAAAAA==",
+        "mimeType": "image/x-mkcd-f4",
+        "displayName": "redThing1"
+    },
+    "image18": {
+        "data": "hwQIAAgAAAAAAAAAICIiAiASEgIgERICICERAiAhIQIgIiICAAAAAA==",
+        "mimeType": "image/x-mkcd-f4",
+        "displayName": "redThing5"
+    },
+    "image17": {
+        "data": "hwQIAAgAAAAAAAAAICIiAiAhEgIgIRICICERAiAREQIgIiICAAAAAA==",
+        "mimeType": "image/x-mkcd-f4",
+        "displayName": "redThing3"
+    },
+    "image19": {
+        "data": "hwQIAAgAAAAAAAAAgIiICICIGAiAgRgIgBERCICIGAiAiIgIAAAAAA==",
+        "mimeType": "image/x-mkcd-f4",
+        "displayName": "blueThing1"
+    },
+    "image43": {
+        "data": "hwQEAAQAAAAgAAAAcCcAAHIAAAAAAgAA",
+        "mimeType": "image/x-mkcd-f4",
+        "displayName": "redPikminGROUNDED"
+    },
+    "image35": {
+        "data": "hwQQABAAAAAAAAAAAAAAAAAAQEREBAAAAEAEAARABAAABAAABABAAAAEAMzMAEAAQADA3d0MAARAANy9280ABEBE3BuxzQAEQADcG7HNRARAANy9280ABEAAwN3dDAAEAAQAzMwAQAAABABAAABAAABABEAAQAQAAABAREQEAAAAAAAAAAAAAA==",
+        "mimeType": "image/x-mkcd-f4",
+        "displayName": "shipThing"
+    },
+    "image42": {
+        "data": "hwQQABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+        "mimeType": "image/x-mkcd-f4",
+        "displayName": "nullllllllllllllll lol"
     },
     "*": {
         "mimeType": "image/x-mkcd-f4",
