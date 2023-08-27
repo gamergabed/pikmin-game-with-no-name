@@ -16,7 +16,6 @@ sprites.onOverlap(SpriteKind.Wistle, SpriteKind.GroundedPikmin, function (sprite
 controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
     for (let value of sprites.allOfKind(SpriteKind.Pikmin)) {
         sprites.setDataBoolean(value, "following", false)
-        sprites.setDataNumber(value, "Gid", 0)
         value.follow(mySprite, 0)
     }
     mySprite2 = sprites.create(assets.image`wistile wave`, SpriteKind.Wistle)
@@ -110,6 +109,7 @@ function spawnTresure (Type: number, TX: number, TY: number, Rotation: number, W
     assets.image`nullllllllllllllll lol`,
     assets.image`redThing1`,
     assets.image`blueThing1`,
+    assets.image`yellowThing0`,
     assets.image`treNail`,
     assets.image`treRoundFun`,
     assets.image`treEnergyContainer`
@@ -149,7 +149,7 @@ sprites.onOverlap(SpriteKind.Pikmin, SpriteKind.Tresure, function (sprite, other
     otherSprite.sayText("" + sprites.readDataNumber(otherSprite, "PikminHolding") + "/" + sprites.readDataNumber(otherSprite, "Weight"), 500, false)
 })
 function spawnGroundPikmin (Type: number, X: number, Y: number) {
-    Pikmin2 = sprites.create([assets.image`nullllllllllllllll lol`, assets.image`redPikminGROUNDED`][Type], SpriteKind.GroundedPikmin)
+    Pikmin2 = sprites.create([assets.image`redPikminGROUNDED`, assets.image`bluePikminGROUNDED`, assets.image`yellowPikminGROUNDED`][Type], SpriteKind.GroundedPikmin)
     tiles.placeOnTile(Pikmin2, tiles.getTileLocation(X, Y))
     sprites.setDataNumber(Pikmin2, "type", Type)
 }
@@ -157,14 +157,22 @@ function VisonArea (S1: Sprite, S2: Sprite, Range: number) {
     return Math.sqrt(Math.abs((S1.x - S2.x) ** 2 - (S1.y - S2.y) ** 2)) > Range
 }
 scene.onOverlapTile(SpriteKind.Tresure, assets.tile`hLANDING0`, function (sprite, location) {
-    music.play(music.stringPlayable("C5 - B B - - - - ", 800), music.PlaybackMode.InBackground)
+    music.play(music.stringPlayable("D E C5 B - - - - ", 800), music.PlaybackMode.InBackground)
     _tempBooleon = true
-    for (let index = 0; index <= 2; index++) {
-        if (sprite.image.equals([assets.image`redThing1`, assets.image`blueThing1`, assets.image`blueThing1`][index])) {
+    for (let index = 0; index <= 3; index++) {
+        if (sprite.image.equals([assets.image`redThing1`, assets.image`blueThing1`, assets.image`yellowThing0`][index])) {
+            console.logValue("Tresure is ", index)
             _tempBooleon = false
-            spawnGroundPikmin(index + 1, 1, 1)
+            for (let index2 = 0; index2 < 3; index2++) {
+                spawnGroundPikmin(index, sprite.tilemapLocation().column, sprite.tilemapLocation().row)
+            }
+            info.changeScoreBy(10)
         }
     }
+    if (_tempBooleon) {
+        info.changeScoreBy(100)
+    }
+    sprites.destroy(sprite)
 })
 let packColor = 0
 let allColor = 0
@@ -303,7 +311,6 @@ game.onUpdate(function () {
     }
 })
 game.onUpdateInterval(20000, function () {
-    _tempBooleon = true
     for (let value9 of tiles.getTilesByType(assets.tile`hPathOVERGROWN`)) {
         if (Math.percentChance(20)) {
             if (!(pikminType < 0)) {

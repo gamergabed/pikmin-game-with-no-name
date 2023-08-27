@@ -214,6 +214,26 @@
         "mimeType": "image/x-mkcd-f4",
         "displayName": "nullllllllllllllll lol"
     },
+    "image44": {
+        "data": "hwQEAAQAAACAAAAAcIcAAHgAAAAACAAA",
+        "mimeType": "image/x-mkcd-f4",
+        "displayName": "bluePikminGROUNDED"
+    },
+    "image46": {
+        "data": "hwQIAAgAAAAAAAAAUFVVBVBVFQVQURUFUBERBVBVFQVQVVUFAAAAAA==",
+        "mimeType": "image/x-mkcd-f4",
+        "displayName": "yellowThing0"
+    },
+    "image45": {
+        "data": "hwQEAAQAAABQAAAAcFcAAHUAAAAABQAA",
+        "mimeType": "image/x-mkcd-f4",
+        "displayName": "yellowPikminGROUNDED"
+    },
+    "image47": {
+        "data": "hwQQABAAAAAAABEREREAAAAR3d3d3REAEN3dvdvd3QEQvdu9273bAdG9293dvdsd0d3du7vd3R3R3b3d3dvdHdG7vb3b27sd0bu9vdvbux3R3b3d3dvdHdHd3bu73d0d0b3b3d292x0Qvdu9273bARDd3b3b3d0BABHd3d3dEQAAABEREREAAA==",
+        "mimeType": "image/x-mkcd-f4",
+        "displayName": "action"
+    },
     "*": {
         "mimeType": "image/x-mkcd-f4",
         "dataEncoding": "base64",

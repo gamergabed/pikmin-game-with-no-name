@@ -706,6 +706,50 @@ a a a a
 . . . . . . . . . . . . . . . . 
 . . . . . . . . . . . . . . . . 
 `;
+            case "image44":
+            case "bluePikminGROUNDED":return img`
+. . 8 . 
+8 7 7 . 
+. 7 . 8 
+. 8 . . 
+`;
+            case "image46":
+            case "yellowThing0":return img`
+. . . . . . . . 
+. 5 5 5 5 5 5 . 
+. 5 5 1 1 5 5 . 
+. 5 5 5 1 5 5 . 
+. 5 5 5 1 5 5 . 
+. 5 1 1 1 1 5 . 
+. 5 5 5 5 5 5 . 
+. . . . . . . . 
+`;
+            case "image45":
+            case "yellowPikminGROUNDED":return img`
+. . 5 . 
+5 7 7 . 
+. 7 . 5 
+. 5 . . 
+`;
+            case "image47":
+            case "action":return img`
+. . . . 1 1 1 1 1 1 1 1 . . . . 
+. . 1 1 d d d d d d d d 1 1 . . 
+. 1 d d d d d b b d d d d d 1 . 
+. 1 d b b d d b b d d b b d 1 . 
+1 d d b b d d d d d d b b d d 1 
+1 d d d d d b b b b d d d d d 1 
+1 d d d d b d d d d b d d d d 1 
+1 d b b d b d b b d b d b b d 1 
+1 d b b d b d b b d b d b b d 1 
+1 d d d d b d d d d b d d d d 1 
+1 d d d d d b b b b d d d d d 1 
+1 d d b b d d d d d d b b d d 1 
+. 1 d b b d d b b d d b b d 1 . 
+. 1 d d d d d b b d d d d d 1 . 
+. . 1 1 d d d d d d d d 1 1 . . 
+. . . . 1 1 1 1 1 1 1 1 . . . . 
+`;
         }
         return null;
     })
