@@ -97,7 +97,7 @@ function loadHud () {
     Player_HUD.z = 9999
     pikminMeterThing = textsprite.create("x10/10/10", 1, 13)
     pikminMeterThing.setFlag(SpriteFlag.RelativeToCamera, true)
-    pikminMeterThing.setPosition(137, 105)
+    pikminMeterThing.setPosition(135, 105)
     pikminMeterThing.z = 9999
     hpPlayer = statusbars.create(20, 4, StatusBarKind.Health)
     hpPlayer.setFlag(SpriteFlag.RelativeToCamera, true)
@@ -310,7 +310,7 @@ game.onUpdate(function () {
         mySprite.y = Captain.y
     }
 })
-game.onUpdateInterval(20000, function () {
+game.onUpdateInterval(10000, function () {
     for (let value9 of tiles.getTilesByType(assets.tile`hPathOVERGROWN`)) {
         if (Math.percentChance(20)) {
             if (!(pikminType < 0)) {
